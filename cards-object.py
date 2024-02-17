@@ -1,3 +1,4 @@
+from faker import Faker
 
 # Podstawowa klasa Wizytówki
 
@@ -13,7 +14,7 @@ class Card:
         self._sec_name_length = 0
 
     def __str__(self):
-        return f'{self.name} {self.sec_name} {self.mail}'
+        return f'{self.name} {self.sec_name} {self.mail} {self.job} {self.company}'
     
     def contact(self):
         return f"Kontaktuje się z {self.name} {self.sec_name} {self.job} {self.mail}"
@@ -56,14 +57,16 @@ class BusinessContact(BaseContact):
 # Wyniki wybierania numerów telefonu
 
 first_person = BaseContact(name='Aga', sec_name='Bąk', company='AGG', job='sekretarka', mail='agabak@gmail.com', phone_number='505050219')
-print(first_person.contact())
-print(first_person.label_length())
+#print(first_person.contact())
+#print(first_person.label_length())
 first_person = BusinessContact(name='Aga', sec_name='Bąk', company='AGG', job='sekretarka', mail='agabak@gmail.com', job_phone='450230105', phone_number='505050129')
-print(first_person.contact())
-print(first_person.label_length())
+#print(first_person.contact())
+#print(first_person.label_length())
 
 
 
+
+# Przykladowe postacie
 
 
 sec_person = Card(name='Bart', sec_name='Kot', company='AKA', job='kierowca', mail='barton@gmail.com')
@@ -80,8 +83,35 @@ by_sec_name = sorted(card_list,key=lambda card: card.sec_name)
 by_mail = sorted(card_list, key=lambda card: card.mail)
 
 
-#for i in by_sec_name:
-#    print(i.name, i.sec_name, i.mail)
+# Faker - generator
+
+faker = Faker()
+
+def create_contacts(type, quantity):
+    if type == 'BaseContact':
+        for i in range(quantity):
+            i = BaseContact(name=faker.first_name(),
+                            sec_name=faker.last_name(),
+                            company=faker.company(),
+                            job=faker.job(),
+                            mail=faker.email(),
+                            phone_number=faker.phone_number()
+                            )
+            print(i)
+    if type == 'BusinessContact':
+        for i in range(quantity):
+            i = BusinessContact(name=faker.first_name(),
+                            sec_name=faker.last_name(),
+                            company=faker.company(),
+                            job=faker.job(),
+                            mail=faker.email(),
+                            job_phone=faker.phone_number(),
+                            phone_number=''
+                            )
+            print(i)
+
+
+create_contacts('BusinessContact', 4)
 
 
 
