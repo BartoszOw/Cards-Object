@@ -54,7 +54,7 @@ class BusinessContact(BaseContact):
         super().label_length()
         return self._name_length, self._sec_name_length
 
-# Wyniki wybierania numerów telefonu
+# Wyniki wybierania numerów telefonu -  contact() i label_length()
 
 first_person = BaseContact(name='Aga', sec_name='Bąk', company='AGG', job='sekretarka', mail='agabak@gmail.com', phone_number='505050219')
 #print(first_person.contact())
@@ -83,7 +83,7 @@ by_sec_name = sorted(card_list,key=lambda card: card.sec_name)
 by_mail = sorted(card_list, key=lambda card: card.mail)
 
 
-# Faker - generator
+# Faker - generator   - create_contacts()
 
 faker = Faker()
 
